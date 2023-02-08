@@ -11,6 +11,7 @@ import {
   Query,
 } from '@nestjs/common';
 
+import { ParseIntPipe } from 'src/common/parse-int/parse-int.pipe';
 import { ProductsService } from 'src/services/products.service';
 
 @Controller('products')
@@ -28,8 +29,10 @@ export class ProductsController {
 
   @Get(':productId')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('productId') productId: string) {
-    return this.productsService.findOne(+productId);
+  // ParseIntPipe created as an example, to parse int you can import
+  // ParseIntPipe from @nestjs/common.
+  getOne(@Param('productId', ParseIntPipe) productId: number) {
+    return this.productsService.findOne(productId);
   }
 
   @Post()
