@@ -12,7 +12,8 @@ export class ProductsService {
       name: 'Product 1',
       description: 'bla bla',
       price: 122,
-      image: '',
+      image:
+        'https://www.thesprucepets.com/thmb/aAEE1D_mgBmYgvGw61sjhS6BqVM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/golden-retriever-puppy-in-grass-923135452-5c887d4146e0fb00013365ba.jpg',
       stock: 12,
     },
   ];
