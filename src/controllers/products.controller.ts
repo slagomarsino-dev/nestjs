@@ -11,49 +11,39 @@ import {
   Query,
 } from '@nestjs/common';
 
+import { ProductsService } from 'src/services/products.service';
+
 @Controller('products')
 export class ProductsController {
+  constructor(private productsService: ProductsService) {}
+
   @Get()
   getProducts(
     @Query('limit') limit = 100,
     @Query('offset') offset = 0,
     @Query('brand') brand: string,
   ) {
-    return {
-      message: `products: limit = ${limit} - offset = ${offset} - brand = ${brand}`,
-    };
+    return this.productsService.findAll();
   }
 
   @Get(':productId')
   @HttpCode(HttpStatus.ACCEPTED)
   getOne(@Param('productId') productId: string) {
-    return {
-      message: `product ${productId}`,
-    };
+    return this.productsService.findOne(+productId);
   }
 
   @Post()
   create(@Body() payload: any) {
-    return {
-      message: 'Creation action',
-      payload,
-    };
+    return this.productsService.create(payload);
   }
 
   @Put(':productId')
   update(@Param('productId') productId: string, @Body() payload: any) {
-    return {
-      id: productId,
-      message: 'Update action',
-      payload,
-    };
+    return this.productsService.update(+productId, payload);
   }
 
   @Delete(':productId')
   delete(@Param('productId') productId: string) {
-    return {
-      id: productId,
-      message: 'Delete action',
-    };
+    return this.productsService.remove(+productId);
   }
 }
